@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	  <meta charset="UTF-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <title>Exercício 02 - Prog. WEB</title>
+	  <style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		
+		section {
+			margin: auto;
+			text-align: center;
+		}
+
+		h1 {
+			font-size: 30px;
+			margin: 20px;
+		}
+
+		#inputs {
+			border-radius: 10px;
+			margin: auto;
+			padding: 15px;
+			border: 1.5px solid #000;
+			width: 420px;
+		}
+
+		#input1 {
+			margin-bottom: 12px;
+		}
+
+		div {
+			font-size: 25px;
+		}
+
+		#real {
+			padding: 5px;
+			font-size: 20px;
+		}
+
+		#real::placeholder {
+			color: #D9D9D9;
+		}
+
+		#check {
+			width: 20px;
+			height: 20px;
+			cursor: pointer;
+		}
+
+		#res {
+			padding: 15px;
+		}
+		</style>
+</head>
+<body>
+
+	  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+	  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+	  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  	<div id="root"></div>
+
+	  <script type="text/babel"> 
+        function Form() {
+            let reais, convertDolar
+    
+			// Criando referências para elementos do componente com useRef()
+			const reaisRef = React.useRef()
+			const convertDolarRef = React.useRef()
+			const resultadoRef = React.useRef()
+
+			function handleChange(event) {
+				convertDolar = Number(convertDolarRef.current.checked)
+				let resultado = resultadoRef.current
+
+				if (convertDolar) {
+					reais = Number(reaisRef.current.value) / 5.03
+					resultadoRef.current.textContent = `Valor convertido em dolares: US$ ${reais.toFixed(2)}`
+					resultado.style.display = 'block'
+				} else {
+					resultado.style.display = 'none';
+				}
+			}
+
+			return (
+				<section>
+					<h1>Formulário React - Exercício 02</h1>
+					<form>
+						<div id='inputs'>
+							<div id='input1'>
+							<label>
+								<span>R$ </span>
+								<input type='number' ref={reaisRef} onChange={handleChange} id='real' placeholder="Insira o valor em reais" />	
+							</label>	
+							</div>	
+							<div>
+							<label>
+								<input type="checkbox" ref={convertDolarRef} onClick={handleChange} id='check' />
+								<span> Converter para dólares</span>	
+							</label>
+							</div>
+						</div>
+						<div ref={resultadoRef} id='res'></div>
+					</form>
+				</section>
+			)
+        }
+
+		const container = <> <Form /> </>
+		const root = ReactDOM.createRoot(document.getElementById('root'))
+		root.render(container)
+	  </script>
+    
+</body>
+</html>

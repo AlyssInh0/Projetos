@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	 <meta charset="UTF-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Exercício 03 - Prog. WEB</title>
+    <style>
+        div, input {
+            font-size: 18px;
+            margin-bottom: 3px;
+        }
+    </style>
+</head>
+<body>
+
+	  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+	  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+	  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  	<div id="root"></div>
+
+	  <script type="text/babel"> 
+        // Refazer o exercício 02 usando useState
+
+        function Form() {
+            const [real, setReal] = React.useState('')
+            const [dolar, setDolar] = React.useState('')
+
+            const conversao = () => {
+                if (Number(dolar) !== 0) {
+                    return (Number(real) / Number(dolar)).toFixed(2)
+                }
+            }
+
+			return (
+				<>
+					<h1>Formulário React - Exercício 03</h1>
+					<form>
+						<div>
+                            <label>
+                                <span>Valor em reais </span>
+                                <input type='number' onChange={event => setReal(event.target.value)} />	
+                            </label>	
+						</div>	
+						<div>
+                            <label>
+                                <span>Valor do dólar atualmente </span>	
+                                <input type="number" onChange={event => setDolar(event.target.value)} />
+                            </label>
+						</div>
+                         <div>
+                            Valor convertido em dólares = US$ {conversao()}
+                        </div>
+                    </form>
+				</>
+			)
+        }
+
+		const root = ReactDOM.createRoot(document.getElementById('root'))
+		root.render(<Form />)
+	  </script>
+    
+</body>
+</html>
